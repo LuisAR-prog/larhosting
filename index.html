@@ -286,6 +286,149 @@ body::before {
   animation: scrollPulse 2s ease infinite;
 }
 
+/* ========== CAROUSEL SECTION ========== */
+.carousel-section {
+  padding: 0;
+  position: relative;
+  background: var(--black);
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel-track {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 70vh;
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(8, 8, 8, 0.7) 0%,
+    rgba(8, 8, 8, 0.2) 35%,
+    rgba(8, 8, 8, 0.05) 60%,
+    rgba(8, 8, 8, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.carousel-caption-city {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.carousel-caption-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(8, 8, 8, 0.45);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: var(--white);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.carousel-arrow:hover {
+  background: var(--gold);
+  color: var(--black);
+  border-color: var(--gold);
+}
+
+.carousel-arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+.carousel-arrow.prev { left: 20px; }
+.carousel-arrow.next { right: 20px; }
+
+.carousel-dots {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 4;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(245, 240, 232, 0.25);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: var(--gold);
+  width: 22px;
+  border-radius: 4px;
+}
+
 /* ========== SECTION COMMON ========== */
 section {
   padding: 120px 40px;
@@ -601,6 +744,42 @@ section {
   transform: translateX(4px);
 }
 
+/* ========== NEW / RECENTLY FINISHED CARD ========== */
+.card-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 2px;
+  box-shadow: 0 4px 16px rgba(201, 168, 76, 0.35);
+}
+
+.card-placeholder {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(201, 168, 76, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(201, 168, 76, 0.08) 0%, transparent 55%),
+    linear-gradient(160deg, #1a1714 0%, #0b0b0b 55%, #141210 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-placeholder svg.placeholder-art {
+  width: 72%;
+  max-width: 320px;
+  height: auto;
+  opacity: 0.85;
+  filter: drop-shadow(0 6px 30px rgba(201, 168, 76, 0.12));
+}
+
 /* ========== CONTACT SECTION ========== */
 .contact {
   max-width: 1200px;
@@ -818,6 +997,27 @@ section {
     padding: 0 20px;
   }
 
+  .carousel-track {
+    aspect-ratio: 4 / 3;
+  }
+
+  .carousel-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .carousel-arrow.prev { left: 10px; }
+  .carousel-arrow.next { right: 10px; }
+
+  .carousel-caption { bottom: 50px; }
+
+  .card-badge {
+    top: 14px;
+    right: 14px;
+    font-size: 0.58rem;
+    padding: 6px 11px;
+  }
+
   .nav-links {
     display: none;
     position: fixed;
@@ -964,31 +1164,76 @@ section {
   </div>
 </section>
 
+<!-- ========== PHOTO CAROUSEL ========== -->
+<section class="carousel-section" aria-label="Galería de propiedades">
+  <div class="carousel" id="carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide active">
+        <img src="cartagena-infinitum.png" alt="Infinitum Cartagena" loading="lazy">
+        <div class="carousel-caption">
+          <div class="carousel-caption-city">Cartagena</div>
+          <div class="carousel-caption-name">Infinitum Deluxe</div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="cartagena-beach.png" alt="Cartagena Beach" loading="lazy">
+        <div class="carousel-caption">
+          <div class="carousel-caption-city">Cartagena</div>
+          <div class="carousel-caption-name">Cartagena Beach</div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="armenia-corina.png" alt="Reservas del Corina" loading="lazy">
+        <div class="carousel-caption">
+          <div class="carousel-caption-city">Armenia</div>
+          <div class="carousel-caption-name">Reservas del Corina</div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="santa-marta.png" alt="Santa Marta Resort" loading="lazy">
+        <div class="carousel-caption">
+          <div class="carousel-caption-city">Santa Marta</div>
+          <div class="carousel-caption-name">Santa Marta Resort</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-arrow prev" id="carouselPrev" aria-label="Anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="carousel-arrow next" id="carouselNext" aria-label="Siguiente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+</section>
+
 <!-- ========== ABOUT ========== -->
 <section id="sobre" class="observe">
   <div class="about">
     <div class="about-content">
-      <span class="section-label">Quienes Somos</span>
-      <h2 class="section-title">El arte de la <em>hospitalidad</em></h2>
+      <span class="section-label">Sobre Nosotros</span>
+      <h2 class="section-title">Hecho con <em>cariño</em></h2>
       <div class="section-divider"></div>
       <p class="about-text">
-        En LAR Hosting & Hospitality seleccionamos los alojamientos
-        mas exclusivos de Colombia. Cada propiedad es elegida por su
-        ubicacion privilegiada, diseno excepcional y atencion al detalle
-        que garantiza una experiencia inolvidable para nuestros huespedes.
+        Somos una familia apasionada por recibir bien. Cada apartamento lo
+        elegimos, lo arreglamos y lo cuidamos como si fuera nuestra casa,
+        para que tu estancia se sienta tranquila, cómoda y con todos los
+        detalles a la mano.
       </p>
       <p class="about-text">
-        Desde las playas del Caribe hasta el corazon del Eje Cafetero,
-        ofrecemos estancias de lujo con el servicio personalizado que
-        usted merece.
+        Desde las playas del Caribe hasta las montañas del Eje Cafetero,
+        te esperamos con una bienvenida cálida y un espacio sencillo,
+        limpio y listo para disfrutar.
       </p>
       <div class="about-stats">
         <div class="stat">
-          <div class="stat-number">5+</div>
+          <div class="stat-number">5</div>
           <div class="stat-label">Ciudades</div>
         </div>
         <div class="stat">
-          <div class="stat-number">4</div>
+          <div class="stat-number">5</div>
           <div class="stat-label">Propiedades</div>
         </div>
         <div class="stat">
@@ -1080,6 +1325,46 @@ section {
           </button>
         </div>
       </div>
+
+      <!-- Card 5: Manizales (Recién Terminado) -->
+      <div class="property-card" data-delay="600">
+        <div class="card-image-wrapper card-placeholder">
+          <svg class="placeholder-art" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="mtn" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#C9A84C" stop-opacity="0.55"/>
+                <stop offset="1" stop-color="#C9A84C" stop-opacity="0.08"/>
+              </linearGradient>
+              <linearGradient id="bld" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#E8D48B" stop-opacity="0.9"/>
+                <stop offset="1" stop-color="#8B7326" stop-opacity="0.35"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 150 L60 95 L110 130 L165 70 L220 115 L275 85 L320 120 L320 200 L0 200 Z" fill="url(#mtn)"/>
+            <g stroke="url(#bld)" stroke-width="1.2" fill="none" opacity="0.9">
+              <rect x="130" y="95" width="24" height="55"/>
+              <rect x="160" y="75" width="28" height="75"/>
+              <rect x="194" y="105" width="20" height="45"/>
+            </g>
+            <g fill="#C9A84C" opacity="0.75">
+              <circle cx="142" cy="108" r="0.9"/><circle cx="142" cy="120" r="0.9"/><circle cx="142" cy="132" r="0.9"/>
+              <circle cx="174" cy="92" r="0.9"/><circle cx="174" cy="104" r="0.9"/><circle cx="174" cy="116" r="0.9"/><circle cx="174" cy="128" r="0.9"/>
+              <circle cx="204" cy="118" r="0.9"/><circle cx="204" cy="130" r="0.9"/>
+            </g>
+            <line x1="20" y1="168" x2="300" y2="168" stroke="#C9A84C" stroke-opacity="0.25" stroke-width="0.6"/>
+          </svg>
+          <div class="card-overlay"></div>
+        </div>
+        <span class="card-badge">Recién Terminado</span>
+        <div class="card-content">
+          <span class="card-city">Manizales</span>
+          <h3 class="card-name">Mirador del Ruiz</h3>
+          <button class="card-btn" onclick="reservar('Manizales Mirador del Ruiz')">
+            Reservar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1115,7 +1400,7 @@ section {
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <h3>Presencia</h3>
-        <p>Cartagena, Armenia,<br>Santa Marta, Pereira</p>
+        <p>Cartagena, Armenia,<br>Santa Marta, Pereira, Manizales</p>
       </div>
     </div>
   </div>
@@ -1195,6 +1480,58 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// Photo carousel
+(function initCarousel() {
+  const track = document.getElementById('carouselTrack');
+  if (!track) return;
+  const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+  const dotsWrap = document.getElementById('carouselDots');
+  const prev = document.getElementById('carouselPrev');
+  const next = document.getElementById('carouselNext');
+  let index = 0;
+  let timer;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Ir a la imagen ' + (i + 1));
+    dot.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.querySelectorAll('.carousel-dot'));
+
+  function go(i) {
+    slides[index].classList.remove('active');
+    dots[index].classList.remove('active');
+    index = (i + slides.length) % slides.length;
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+    restart();
+  }
+
+  function start() { timer = setInterval(() => go(index + 1), 5500); }
+  function stop() { clearInterval(timer); }
+  function restart() { stop(); start(); }
+
+  prev.addEventListener('click', () => go(index - 1));
+  next.addEventListener('click', () => go(index + 1));
+
+  const carousel = document.getElementById('carousel');
+  carousel.addEventListener('mouseenter', stop);
+  carousel.addEventListener('mouseleave', start);
+
+  // Basic touch swipe
+  let startX = 0;
+  track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; stop(); }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+    else start();
+  });
+
+  start();
+})();
 </script>
 
 </body>

@@ -908,6 +908,351 @@ section {
   text-decoration: none;
 }
 
+/* ========== PROPERTY MODAL ========== */
+.property-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(4, 4, 4, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.property-modal.open {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  max-height: 92vh;
+  background: var(--black-card);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  transform: translateY(20px) scale(0.98);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.property-modal.open .modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 6;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(8, 8, 8, 0.6);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.modal-close:hover {
+  background: var(--gold);
+  color: var(--black);
+  border-color: var(--gold);
+}
+
+.modal-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+.modal-gallery {
+  position: relative;
+  background: #050505;
+  min-height: 420px;
+}
+
+.modal-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.modal-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(8, 8, 8, 0.55);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: var(--white);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.modal-gallery-arrow:hover {
+  background: var(--gold);
+  color: var(--black);
+  border-color: var(--gold);
+}
+
+.modal-gallery-arrow.prev { left: 14px; }
+.modal-gallery-arrow.next { right: 14px; }
+
+.modal-gallery-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+.modal-thumbs {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+  padding: 6px 10px;
+  background: rgba(8, 8, 8, 0.55);
+  border-radius: 30px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.modal-thumb {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(245, 240, 232, 0.3);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.modal-thumb.active {
+  background: var(--gold);
+  width: 22px;
+  border-radius: 4px;
+}
+
+.modal-body {
+  padding: 48px 44px 40px;
+  overflow-y: auto;
+  max-height: 92vh;
+}
+
+.modal-body::-webkit-scrollbar { width: 4px; }
+.modal-body::-webkit-scrollbar-track { background: transparent; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 2px; }
+
+.modal-city {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-city::before {
+  content: '';
+  width: 26px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.modal-subtitle {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--white-dim);
+  margin-bottom: 22px;
+}
+
+.modal-divider {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin-bottom: 24px;
+}
+
+.modal-description {
+  font-family: var(--font-accent);
+  font-size: 1.05rem;
+  color: var(--white-dim);
+  line-height: 1.8;
+  margin-bottom: 22px;
+}
+
+.modal-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: grid;
+  gap: 12px;
+}
+
+.modal-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.5;
+}
+
+.modal-features svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.modal-features li strong {
+  color: var(--gold-light);
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.modal-section-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.modal-nearby {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.modal-nearby span {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  padding: 7px 14px;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 30px;
+  color: var(--white-dim);
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.modal-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  color: var(--black);
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.4s ease;
+}
+
+.modal-cta:hover {
+  background: transparent;
+  color: var(--gold);
+}
+
+.modal-cta svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.modal-cta:hover svg {
+  transform: translateX(4px);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .modal-dialog {
+    grid-template-columns: 1fr;
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+
+  .modal-gallery {
+    min-height: 300px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .modal-body {
+    padding: 32px 26px;
+    max-height: none;
+  }
+
+  .modal-title {
+    font-size: 1.6rem;
+  }
+}
+
 /* ========== WHATSAPP BUTTON ========== */
 .whatsapp-btn {
   position: fixed;
@@ -1183,10 +1528,10 @@ section {
         </div>
       </div>
       <div class="carousel-slide">
-        <img src="armenia-corina.png" alt="Reservas del Corina" loading="lazy">
+        <img src="armenia-corina.png" alt="Corales Armenia" loading="lazy">
         <div class="carousel-caption">
           <div class="carousel-caption-city">Armenia</div>
-          <div class="carousel-caption-name">Reservas del Corina</div>
+          <div class="carousel-caption-name">Corales</div>
         </div>
       </div>
       <div class="carousel-slide">
@@ -1264,7 +1609,7 @@ section {
     <div class="catalog-grid">
       <!-- Card 1: Infinitum (Large) -->
       <div class="property-card" data-delay="0">
-        <div class="card-image-wrapper">
+        <div class="card-image-wrapper" onclick="openPropertyModal('infinitum-deluxe')" style="cursor: zoom-in;">
           <img src="cartagena-infinitum.png" alt="Infinitum Cartagena" loading="lazy">
           <div class="card-overlay"></div>
         </div>
@@ -1280,7 +1625,7 @@ section {
 
       <!-- Card 2: Cartagena Beach -->
       <div class="property-card" data-delay="150">
-        <div class="card-image-wrapper">
+        <div class="card-image-wrapper" onclick="openPropertyModal('cartagena-beach')" style="cursor: zoom-in;">
           <img src="cartagena-beach.png" alt="Cartagena Beach" loading="lazy">
           <div class="card-overlay"></div>
         </div>
@@ -1294,16 +1639,16 @@ section {
         </div>
       </div>
 
-      <!-- Card 3: Reservas del Corina -->
+      <!-- Card 3: Corales -->
       <div class="property-card" data-delay="300">
-        <div class="card-image-wrapper">
-          <img src="armenia-corina.png" alt="Reservas del Corina" loading="lazy">
+        <div class="card-image-wrapper" onclick="openPropertyModal('corales')" style="cursor: zoom-in;">
+          <img src="armenia-corina.png" alt="Corales Armenia" loading="lazy">
           <div class="card-overlay"></div>
         </div>
         <div class="card-content">
           <span class="card-city">Armenia</span>
-          <h3 class="card-name">Reservas del Corina</h3>
-          <button class="card-btn" onclick="reservar('Armenia Reservas del Corina')">
+          <h3 class="card-name">Corales</h3>
+          <button class="card-btn" onclick="reservar('Armenia Corales')">
             Reservar
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
@@ -1413,6 +1758,46 @@ section {
     <p class="footer-text">&copy; 2026 LAR Hosting & Hospitality. Todos los derechos reservados.</p>
   </div>
 </footer>
+
+<!-- ========== PROPERTY MODAL ========== -->
+<div class="property-modal" id="propertyModal" role="dialog" aria-modal="true" aria-labelledby="propertyModalTitle">
+  <div class="modal-dialog">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+
+    <div class="modal-gallery" id="modalGallery">
+      <div class="modal-slides" id="modalSlides"></div>
+
+      <button class="modal-gallery-arrow prev" id="modalPrev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="modal-gallery-arrow next" id="modalNext" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
+
+    <div class="modal-body">
+      <span class="modal-city" id="modalCity"></span>
+      <h3 class="modal-title" id="propertyModalTitle"></h3>
+      <p class="modal-subtitle" id="modalSubtitle"></p>
+      <div class="modal-divider"></div>
+
+      <p class="modal-description" id="modalDescription"></p>
+
+      <ul class="modal-features" id="modalFeatures"></ul>
+
+      <div class="modal-section-label">Qué hacer cerca</div>
+      <div class="modal-nearby" id="modalNearby"></div>
+
+      <button class="modal-cta" id="modalCta">
+        Reservar por WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- ========== WHATSAPP ========== -->
 <a href="https://wa.me/573107130806" class="whatsapp-btn" target="_blank" aria-label="WhatsApp">
@@ -1531,6 +1916,170 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 
   start();
+})();
+
+// Property modal (gallery + details)
+(function initPropertyModal() {
+  const modal = document.getElementById('propertyModal');
+  if (!modal) return;
+  const gallery = document.getElementById('modalGallery');
+  const slidesWrap = document.getElementById('modalSlides');
+  const thumbsWrap = document.getElementById('modalThumbs');
+  const closeBtn = document.getElementById('modalClose');
+  const prevBtn = document.getElementById('modalPrev');
+  const nextBtn = document.getElementById('modalNext');
+  const cityEl = document.getElementById('modalCity');
+  const titleEl = document.getElementById('propertyModalTitle');
+  const subtitleEl = document.getElementById('modalSubtitle');
+  const descEl = document.getElementById('modalDescription');
+  const featuresEl = document.getElementById('modalFeatures');
+  const nearbyEl = document.getElementById('modalNearby');
+  const ctaBtn = document.getElementById('modalCta');
+
+  const PIN_ICON = '<svg viewBox="0 0 24 24"><path d="M12 22s8-8 8-14a8 8 0 10-16 0c0 6 8 14 8 14z"/><circle cx="12" cy="8" r="3"/></svg>';
+  const WAVE_ICON = '<svg viewBox="0 0 24 24"><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 7c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>';
+  const PEAK_ICON = '<svg viewBox="0 0 24 24"><path d="M3 20l6-14 5 10 3-6 4 10z"/></svg>';
+  const ROAD_ICON = '<svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
+  const PARK_ICON = '<svg viewBox="0 0 24 24"><path d="M4 18l5-8 4 6 3-4 4 6"/><path d="M2 20h20"/></svg>';
+  const SUN_ICON = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+
+  const PROPERTIES = {
+    'corales': {
+      city: 'Armenia, Quindío',
+      title: 'Corales',
+      subtitle: 'Ubicación privilegiada en el corazón del Eje Cafetero',
+      description: 'Corales es un apartamento acogedor y bien equipado, ideal para familias y viajeros que quieren recorrer el Quindío con comodidad. Disfrute de una estancia tranquila a pocos minutos del aeropuerto y con acceso inmediato a la vía nacional, perfecto para explorar los paisajes, parques temáticos y fincas cafeteras de la región.',
+      images: [
+        { src: 'corales-1.jpeg', alt: 'Corales - vista 1' },
+        { src: 'corales-2.jpeg', alt: 'Corales - vista 2' },
+        { src: 'corales-3.jpeg', alt: 'Corales - vista 3' },
+        { src: 'corales-4.jpeg', alt: 'Corales - vista 4' },
+        { src: 'corales-5.jpeg', alt: 'Corales - vista 5' }
+      ],
+      features: [
+        { icon: PIN_ICON, strong: 'A 2 minutos', text: 'del Aeropuerto Internacional El Edén' },
+        { icon: PEAK_ICON, strong: 'A 10 minutos', text: 'del Cerro de Armenia' },
+        { icon: ROAD_ICON, strong: 'Sobre la vía nacional', text: 'salida a Bogotá' },
+        { icon: PARK_ICON, strong: 'Cerca', text: 'del Valle y los Parques Temáticos del Quindío' }
+      ],
+      nearby: ['Parque del Café', 'PANACA', 'Valle del Cocora', 'Salento', 'Filandia', 'Fincas cafeteras', 'Mirador de Calarcá', 'Gastronomía paisa'],
+      cta: 'Armenia Corales'
+    },
+    'infinitum-deluxe': {
+      city: 'Cartagena, Bolívar',
+      title: 'Infinitum Deluxe',
+      subtitle: 'Diseño contemporáneo y descanso premium en la zona norte',
+      description: 'Infinitum Deluxe ofrece una experiencia elegante y confortable para quienes buscan desconectarse junto al mar sin alejarse de los mejores planes de la ciudad. Sus espacios amplios, iluminación natural y ambiente tranquilo lo convierten en una excelente opción para viajes en pareja, familia o estadías largas, con acceso rápido a playas, restaurantes y sitios emblemáticos de Cartagena.',
+      images: [
+        { src: 'cartagena-infinitum.png', alt: 'Infinitum Deluxe - vista principal' }
+      ],
+      features: [
+        { icon: WAVE_ICON, strong: 'Zona norte de Cartagena', text: 'cerca de playas tranquilas y sectores residenciales exclusivos' },
+        { icon: SUN_ICON, strong: 'Ambiente moderno', text: 'con espacios pensados para descanso y comodidad total' },
+        { icon: PIN_ICON, strong: 'Conectividad estratégica', text: 'con fácil acceso a aeropuerto y vías principales' },
+        { icon: ROAD_ICON, strong: 'A pocos minutos', text: 'de experiencias gastronómicas, cultura y vida nocturna' }
+      ],
+      nearby: ['Playa Manzanillo', 'Serena del Mar', 'La Boquilla', 'Centro Histórico', 'Getsemaní', 'Castillo de San Felipe', 'Muelle de la Bodeguita', 'Restaurantes del norte'],
+      cta: 'Cartagena Infinitum Deluxe'
+    },
+    'cartagena-beach': {
+      city: 'Cartagena, Bolívar',
+      title: 'Cartagena Beach',
+      subtitle: 'A pasos del mar, en la exclusiva zona de Los Morros',
+      description: 'Cartagena Beach es un apartamento moderno y luminoso ubicado en la privilegiada zona de Los Morros, al norte de la ciudad. Con acceso directo a la playa, piscina y amplias zonas sociales, es el refugio ideal para descansar frente al Caribe y, al mismo tiempo, estar a pocos minutos del Centro Histórico, la Ciudad Amurallada y las mejores experiencias de Cartagena.',
+      images: [
+        { src: 'cartagena-beach-1.avif', alt: 'Cartagena Beach - vista 1' },
+        { src: 'cartagena-beach-2.avif', alt: 'Cartagena Beach - vista 2' },
+        { src: 'cartagena-beach-3.jpg', alt: 'Cartagena Beach - vista 3' },
+        { src: 'cartagena-beach-4.avif', alt: 'Cartagena Beach - vista 4' }
+      ],
+      features: [
+        { icon: WAVE_ICON, strong: 'Frente al mar', text: 'con acceso directo a la playa en Los Morros' },
+        { icon: SUN_ICON, strong: 'Piscina y zonas sociales', text: 'para disfrutar en familia o en pareja' },
+        { icon: PIN_ICON, strong: 'A 15 minutos', text: 'del Aeropuerto Rafael Núñez' },
+        { icon: ROAD_ICON, strong: 'A 20 minutos', text: 'del Centro Histórico y la Ciudad Amurallada' }
+      ],
+      nearby: ['Playa La Boquilla', 'Serena del Mar', 'Ciudad Amurallada', 'Getsemaní', 'Castillo de San Felipe', 'Islas del Rosario', 'Playa Blanca', 'Gastronomía caribeña'],
+      cta: 'Cartagena Beach'
+    }
+  };
+
+  let slides = [];
+  let thumbs = [];
+  let current = 0;
+
+  function renderProperty(data) {
+    cityEl.textContent = data.city;
+    titleEl.textContent = data.title;
+    subtitleEl.textContent = data.subtitle;
+    descEl.textContent = data.description;
+
+    slidesWrap.innerHTML = data.images.map((img, i) =>
+      `<div class="modal-slide${i === 0 ? ' active' : ''}"><img src="${img.src}" alt="${img.alt}" loading="lazy"></div>`
+    ).join('');
+    slides = Array.from(slidesWrap.querySelectorAll('.modal-slide'));
+
+    thumbsWrap.innerHTML = data.images.map((_, i) =>
+      `<button class="modal-thumb${i === 0 ? ' active' : ''}" aria-label="Ver imagen ${i + 1}"></button>`
+    ).join('');
+    thumbs = Array.from(thumbsWrap.querySelectorAll('.modal-thumb'));
+    thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
+
+    featuresEl.innerHTML = data.features.map(f =>
+      `<li>${f.icon}<span><strong>${f.strong}</strong>${f.text}</span></li>`
+    ).join('');
+
+    nearbyEl.innerHTML = data.nearby.map(n => `<span>${n}</span>`).join('');
+
+    ctaBtn.onclick = () => reservar(data.cta);
+
+    current = 0;
+  }
+
+  function goTo(i) {
+    if (!slides.length) return;
+    slides[current].classList.remove('active');
+    thumbs[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    thumbs[current].classList.add('active');
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  function open() {
+    modal.classList.add('open');
+    document.body.classList.add('modal-open');
+  }
+
+  function close() {
+    modal.classList.remove('open');
+    document.body.classList.remove('modal-open');
+  }
+
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  let startX = 0;
+  gallery.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+  gallery.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+  });
+
+  window.openPropertyModal = function(id) {
+    const data = PROPERTIES[id];
+    if (!data) return;
+    renderProperty(data);
+    open();
+  };
 })();
 </script>
 

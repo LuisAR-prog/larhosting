@@ -1657,14 +1657,14 @@ body.modal-open {
 
       <!-- Card 4: Santa Marta -->
       <div class="property-card" data-delay="450">
-        <div class="card-image-wrapper">
-          <img src="santa-marta.png" alt="Santa Marta" loading="lazy">
+        <div class="card-image-wrapper" onclick="openPropertyModal('santa-marta')" style="cursor: zoom-in;">
+          <img src="santa-marta.png" alt="Santa Marta Resort" loading="lazy">
           <div class="card-overlay"></div>
         </div>
         <div class="card-content">
           <span class="card-city">Santa Marta</span>
           <h3 class="card-name">Santa Marta Resort</h3>
-          <button class="card-btn" onclick="reservar('Santa Marta')">
+          <button class="card-btn" onclick="reservar('Santa Marta Resort')">
             Reservar
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
@@ -2001,6 +2001,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       ],
       nearby: ['Playa La Boquilla', 'Serena del Mar', 'Ciudad Amurallada', 'Getsemaní', 'Castillo de San Felipe', 'Islas del Rosario', 'Playa Blanca', 'Gastronomía caribeña'],
       cta: 'Cartagena Beach'
+    },
+    'santa-marta': {
+      city: 'Santa Marta, Magdalena',
+      title: 'Santa Marta Resort',
+      subtitle: 'Ubicación central para disfrutar la perla del Caribe',
+      description: 'Santa Marta Resort es un apartamento cómodo y bien ubicado en una zona central de la ciudad, ideal para quienes buscan estar cerca de todo: playas, centro histórico, restaurantes y vida nocturna. Desde aquí podrá recorrer con facilidad las joyas de Santa Marta, como el Parque Tayrona, Minca, Playa Blanca y el histórico Rodadero, combinando descanso, naturaleza y cultura caribeña en una sola experiencia.',
+      images: [
+        { src: 'santa-marta-1.jpeg', alt: 'Santa Marta Resort - vista 1' },
+        { src: 'santa-marta-2.jpeg', alt: 'Santa Marta Resort - vista 2' },
+        { src: 'santa-marta-3.jpeg', alt: 'Santa Marta Resort - vista 3' },
+        { src: 'santa-marta-4.jpeg', alt: 'Santa Marta Resort - vista 4' },
+        { src: 'santa-marta-5.jpeg', alt: 'Santa Marta Resort - vista 5' }
+      ],
+      features: [
+        { icon: PIN_ICON, strong: 'Ubicación central', text: 'a pocos minutos de playas, centro y zona gastronómica' },
+        { icon: WAVE_ICON, strong: 'Cerca del Rodadero', text: 'y de las mejores playas del Caribe colombiano' },
+        { icon: PEAK_ICON, strong: 'Puerta de entrada', text: 'al Parque Tayrona y a la Sierra Nevada' },
+        { icon: SUN_ICON, strong: 'Clima cálido todo el año', text: 'ideal para vacaciones en pareja o en familia' }
+      ],
+      nearby: ['Parque Tayrona', 'Playa Blanca', 'El Rodadero', 'Taganga', 'Minca', 'Bahía Concha', 'Quinta de San Pedro Alejandrino', 'Centro Histórico'],
+      cta: 'Santa Marta Resort'
     }
   };
 
